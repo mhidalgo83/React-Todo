@@ -7,6 +7,7 @@ import Button from "@material-ui/core/Button";
 const TodoList = (props) => {
   return (
     <div>
+      <h3>Todos:</h3>
       {props.todos.map((todo) => {
         return (
           <Todo
@@ -16,7 +17,11 @@ const TodoList = (props) => {
           />
         );
       })}
-      <Button variant="contained" color="secondary" onClick={props.clearCompleted}>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={props.clearCompleted}
+      >
         Clear Completed Todos
       </Button>
     </div>

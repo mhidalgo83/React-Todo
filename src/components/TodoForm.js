@@ -1,7 +1,16 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import styled from "styled-components";
 
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Input = styled(TextField)({
+  margin: "2% 0",
+});
 
 class TodoForm extends React.Component {
   constructor() {
@@ -26,9 +35,9 @@ class TodoForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <label htmlFor="todo">
-          <TextField
+          <Input
             id="standard-basic"
             label="Enter Todo"
             onChange={this.handleChange}
@@ -40,7 +49,7 @@ class TodoForm extends React.Component {
         <Button variant="contained" color="primary" type="submit">
           Add To Your List
         </Button>
-      </form>
+      </Form>
     );
   }
 }
