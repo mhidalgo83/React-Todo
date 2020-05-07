@@ -2,9 +2,9 @@
 // feel free to change this component.js into TodoList.js
 import React from "react";
 import Todo from "./Todo";
+import Button from "@material-ui/core/Button";
 
 const TodoList = (props) => {
-  console.log(props);
   return (
     <div>
       {props.todos.map((todo) => {
@@ -16,7 +16,9 @@ const TodoList = (props) => {
           />
         );
       })}
-      <button onClick={props.clearCompleted}>Clear Completed Todos</button>
+      <Button variant="contained" color="secondary" onClick={props.clearCompleted}>
+        Clear Completed Todos
+      </Button>
     </div>
   );
 };

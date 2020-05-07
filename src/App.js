@@ -1,8 +1,34 @@
 import React from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import styled from "styled-components";
 
-const todos = [];
+const Title = styled.h2`
+  display: flex;
+  justify-content: center;
+`;
+
+const CenteredGrid = styled(Grid)({
+  display: "flex",
+  justifyContent: "center",
+  margin: "2% 0",
+});
+
+let todos;
+
+const getTodos = () => {
+  const storage = localStorage.getItem("todos");
+  todos = JSON.parse(storage);
+  if (!todos) {
+    todos = [];
+  }
+};
+
+getTodos();
+
+console.log(window.localStorage);
 
 class App extends React.Component {
   constructor() {
@@ -10,6 +36,10 @@ class App extends React.Component {
     this.state = {
       todos,
     };
+  }
+
+  componentDidUpdate() {
+    this.saveToLocalStorage();
   }
 
   // you will need a place to store your state in this component.
@@ -22,6 +52,11 @@ class App extends React.Component {
         { name: newTodo, completed: false, id: Date.now() },
       ],
     });
+    console.log(this.state.todos);
+  };
+
+  saveToLocalStorage = () => {
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
   };
 
   toggleCompleteTodo = (id) => {
@@ -41,20 +76,29 @@ class App extends React.Component {
         return !todo.completed;
       }),
     });
+    this.saveToLocalStorage();
   };
 
   render() {
-    console.log("Todos: ", this.state.todos);
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoForm addNewTodo={this.addNewTodo} />
-        <TodoList
-          toggleCompleteTodo={this.toggleCompleteTodo}
-          clearCompleted={this.clearCompleted}
-          todos={this.state.todos}
-        />
-      </div>
+      <CssBaseline>
+        <Title>Welcome to your Todo App!</Title>
+        <Grid container spacing={3}>
+          <CenteredGrid item xs={6}>
+            <TodoForm
+              addNewTodo={this.addNewTodo}
+              saveToLocalStorage={this.saveToLocalStorage}
+            />
+          </CenteredGrid>
+          <CenteredGrid item xs={6}>
+            <TodoList
+              toggleCompleteTodo={this.toggleCompleteTodo}
+              clearCompleted={this.clearCompleted}
+              todos={this.state.todos}
+            />
+          </CenteredGrid>
+        </Grid>
+      </CssBaseline>
     );
   }
 }

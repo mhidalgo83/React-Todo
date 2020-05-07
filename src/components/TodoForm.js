@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 
+
 class TodoForm extends React.Component {
   constructor() {
     super();
@@ -19,6 +20,7 @@ class TodoForm extends React.Component {
     if (this.state.newTodo) {
       this.props.addNewTodo(this.state.newTodo);
     }
+    console.log("Todo form");
     this.setState({ newTodo: "" });
   };
 
@@ -35,9 +37,9 @@ class TodoForm extends React.Component {
             value={this.state.newTodo}
           />
         </label>
-        <button>
+        <Button variant="contained" color="primary" type="submit">
           Add To Your List
-        </button>
+        </Button>
       </form>
     );
   }
