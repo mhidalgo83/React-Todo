@@ -1,4 +1,6 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 class TodoForm extends React.Component {
   constructor() {
@@ -24,15 +26,18 @@ class TodoForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label htmlFor="todo">
-          What do you need to get done?
-          <input
+          <TextField
+            id="standard-basic"
+            label="Enter Todo"
             onChange={this.handleChange}
             type="text"
             name="todo"
             value={this.state.newTodo}
           />
         </label>
-        <button>Add To Your List</button>
+        <button>
+          Add To Your List
+        </button>
       </form>
     );
   }

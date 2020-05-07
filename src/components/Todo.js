@@ -1,4 +1,5 @@
 import React from "react";
+import "./Todo.css";
 
 const Todo = (props) => {
   console.log("Todo: ", props);
@@ -7,7 +8,14 @@ const Todo = (props) => {
   };
   console.log(props.todo.completed);
   console.log(props);
-  return <div onClick={handleClick}>{props.todo.name}</div>;
+  return (
+    <div
+      className={`todo ${props.todo.completed ? "completed" : ""}`}
+      onClick={handleClick}
+    >
+      {props.todo.name}
+    </div>
+  );
 };
 
 export default Todo;
